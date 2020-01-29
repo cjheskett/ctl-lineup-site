@@ -1,0 +1,34 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+<title>Kamarill.com / View match reports</title>
+    {% if results %}
+    {% for rs in results%}
+    <h2>{{rs.team1.team}} vs {{rs.team2.team}}</h2><br />
+    <p>Set 1: {{rs.team1.set1.sc2_name}} ({{rs.team1_report.set1result}}) - ({{rs.team2_report.set1result}}) {{rs.team2.set1.sc2_name}}</p>
+    <p>Set 2: {{rs.team1.set2.sc2_name}} ({{rs.team1_report.set2result}}) - ({{rs.team2_report.set2result}}) {{rs.team2.set2.sc2_name}}</p>
+    <p>Set 3: {{rs.team1.set3.sc2_name}} ({{rs.team1_report.set3result}}) - ({{rs.team2_report.set3result}}) {{rs.team2.set3.sc2_name}}</p>
+    <p>Set 4: {{rs.team1.set4.sc2_name}} ({{rs.team1_report.set4result}}) - ({{rs.team2_report.set4result}}) {{rs.team2.set4.sc2_name}}</p>
+    <p>Set 5: {{rs.team1.set5.sc2_name}} ({{rs.team1_report.set5result}}) - ({{rs.team2_report.set5result}}) {{rs.team2.set5.sc2_name}}</p>
+    <p>Set 6: {{rs.team1.set6.sc2_name}} ({{rs.team1_report.set6result}}) - ({{rs.team2_report.set6result}}) {{rs.team2.set6.sc2_name}}</p>
+    <p>Set 7.1: [{{rs.team1_report.set71map}}] {{rs.team1.set7.sc2_name}} ({{rs.team1_report.set71result}}) - ({{rs.team2_report.set71result}}) {{rs.team2.set7.sc2_name}} [{{rs.team2_report.set71map}}]</p>
+    <p>Set 7.2: [{{rs.team1_report.set72map}}] {{rs.team1.set7.sc2_name}} ({{rs.team1_report.set72result}}) - ({{rs.team2_report.set72result}}) {{rs.team2.set7.sc2_name}} [{{rs.team2_report.set72map}}]</p>
+    <p>Set 7.3: [{{rs.team1_report.set73map}}] {{rs.team1.set7.sc2_name}} ({{rs.team1_report.set73result}}) - ({{rs.team2_report.set73result}}) {{rs.team2.set7.sc2_name}} [{{rs.team2_report.set73map}}]</p>
+    <p><div><b>{{rs.team1.team}} says:</b> {{rs.team1_report.comments|linebreaks}}</div></p><div><b>{{rs.team2.team}} says:</b> {{rs.team2_report.comments|linebreaks}}</div>
+    <br /> <br />
+    {% endfor %}
+    {% else %}
+        <form action = "{% url 'view_match_reports' %}" method="post">
+            {% if message %} <p> {{ message }} </p>{% endif %}
+            {% csrf_token %}
+            Week:
+                <select name="week">
+                    {% for w in weeks %}
+                        <option value="{{w.id}}">{{w}}</option>
+                    {% endfor %}
+                </select><br />
+            <input value='Submit' type='submit'>
+        </form><br />
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a><br />
+    {% endif %}
+{% endblock %}

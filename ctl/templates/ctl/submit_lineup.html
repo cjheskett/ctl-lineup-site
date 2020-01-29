@@ -1,0 +1,153 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+<title>Kamarill.com / Submit lineup</title>
+
+    {% if team %}
+        <form action = "{% url 'submit_lineup' %}" method="post">
+            {% if message %} <p> {{ message }} </p>{% endif %}
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="set1">Set 1</label>
+                <select class ="form-control" id="set1" name="set1" aria-describedby="set1map">
+                    <option value=837>FORFEIT</option>
+                    <option value="goldlabel" disabled>---PLATINUM AND LOWER---</option>
+                    {% for player in plats %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+
+                    <option value="benchlabel" disabled>---INACTIVE---</option>
+                    {% for player in bench %}
+                        <option value="{{player.id}}" disabled>{{player}}</option>
+                    {% endfor %}
+                </select>
+                <small id="set1map" class="form-text text-muted" class="form-text text-muted">Map: {{maps.0}}</small>
+            </div>
+            <div class="form-group">
+            <label for="set2">Set 2</label>
+                <select class="form-control" id="set2" name="set2" aria-describedby="set2map">
+                    <option value=837>FORFEIT</option>
+                    <option value="platlabel" disabled>---PLATINUM AND LOWER---</option>
+                    {% for player in plats %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+
+                    <option value="benchlabel" disabled>---INACTIVE---</option>
+                    {% for player in bench %}
+                        <option value="{{player.id}}" disabled>{{player}}</option>
+                    {% endfor %}
+                </select>
+                <small id="set2map" class="form-text text-muted">Map: {{maps.1}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set3">Set 3</label>
+                <select class="form-control" id="set3" name="set3" aria-describedby="set3map">
+                    <option value=837>FORFEIT</option>
+                    <option value="platlabel" disabled>---PLATINUM AND LOWER---</option>
+                    {% for player in plats %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+
+                    <option value="benchlabel" disabled>---INACTIVE---</option>
+                    {% for player in bench %}
+                        <option value="{{player.id}}" disabled>{{player}}</option>
+                    {% endfor %}
+                </select>
+                <small id="set3map" class="form-text text-muted">Map: {{maps.2}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set4">Set 4</label>
+                <select class="form-control" id="set4" name="set4" aria-describedby="set4map">
+                    <option value=837>FORFEIT</option>
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM AND LOWER---</option>
+                    {% for player in plats %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+
+                    <option value="benchlabel" disabled>---INACTIVE---</option>
+                    {% for player in bench %}
+                        <option value="{{player.id}}" disabled>{{player}}</option>
+                    {% endfor %}
+                </select>
+                <small id="set4map" class="form-text text-muted">Map: {{maps.3}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set5">Set 5</label>
+                <select class="form-control" id="set5" name="set5" aria-describedby="set5map">
+                    <option value=837>FORFEIT</option>
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM AND LOWER---</option>
+                    {% for player in plats %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="benchlabel" disabled>---INACTIVE---</option>
+                    {% for player in bench %}
+                        <option value="{{player.id}}" disabled>{{player}}</option>
+                    {% endfor %}
+                </select>
+                <small id="set5map" class="form-text text-muted">Map: {{maps.4}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set6">Set 6</label>
+                <select class="form-control" id="set6" name="set6" aria-describedby="set6map">
+                    <option value=837>FORFEIT</option>
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM AND LOWER---</option>
+                    {% for player in plats %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="benchlabel" disabled>---INACTIVE---</option>
+                    {% for player in bench %}
+                        <option value="{{player.id}}" disabled>{{player}}</option>
+                    {% endfor %}
+                </select>
+                <small id="set6map" class="form-text text-muted">Map: {{maps.5}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set7">Set 7</label>
+                <select class="form-control" id="set7" name="set7" aria-describedby="set7map">
+                    <option value=837>FORFEIT</option>
+                    <option value="masterlabel" disabled>---MASTERS---</option>
+                    {% for player in masters %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+
+                    <option value="platlabel" disabled>---PLATINUM AND LOWER---</option>
+                    {% for player in plats %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.id}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="benchlabel" disabled>---INACTIVE---</option>
+                    {% for player in bench %}
+                        <option value="{{player.id}}" disabled>{{player}}</option>
+                    {% endfor %}
+                </select>
+                <small id="set7map" class="form-text text-muted">Map: {{maps.6}}</small>
+            </div>
+            <input class="form-control" value='Submit' type='submit'>
+        </form>
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+    {% elif lineup %}
+        <p>This is your lineup for {{lineup.week}}. If it is incorrect, please resubmit it before the deadline.</p><br /><br />
+        <p>{{lineup_text|safe}}</p><br /><br />
+        <a class="btn btn-outline-primary" href = "{% url 'pet_duck' %}">You may now pet Colttarren's duck.</a>
+    {% endif %}
+    {% if message %} <p>{{message|safe}}</p> {% endif %}
+{% endblock %}

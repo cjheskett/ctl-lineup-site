@@ -1,0 +1,42 @@
+{% extends 'ctlelo/base.html' %}
+{% block content %}
+    {% if message %} {{message}} {% endif %}
+    <ul class="list-group">
+    {% for player in players %}
+        <li class="list-group-item" style="background-color: #323232">
+            {% if player.race == 'T' %}
+                <img src="http://i.imgur.com/PZaHh.png" />
+            {% elif player.race == 'Z' %}
+                <img src="http://i.imgur.com/HRNlj.png" />
+            {% elif player.race == 'P' %}
+                <img src="http://i.imgur.com/lY0rg.png" />
+            {% else %}
+                <img src="http://i.imgur.com/y6wDt.png" />
+            {% endif %}
+
+            {% if player.league == 0 %}
+                <img src="http://i.imgur.com/y9RuBRK.png" />
+            {% elif player.league == 1 %}
+                <img src="http://i.imgur.com/zX1OLuQ.png" />
+            {% elif player.league == 2 %}
+                <img src="http://i.imgur.com/gPA7DHA.png" />
+            {% elif player.league == 3 %}
+                <img src="http://i.imgur.com/r3lwg4M.png" />
+            {% elif player.league == 4 %}
+                <img src="http://i.imgur.com/2dP4Sju.png" />
+            {% elif player.league == 5 %}
+                <img src="http://i.imgur.com/uugctDk.png" />
+            {% elif player.league == 6 %}
+                <img src="http://i.imgur.com/1ddqA5i.png" />
+            {% endif %}
+
+
+            {{ player.display }}</li>
+    {% endfor %}
+    </ul>
+    <br /><br />
+    <form action='{% url "view_elo" %}' method='post'>
+    {% csrf_token %}
+    <input type='hidden' name="recalculate" value="tyeroktyory" />
+    <!--<button class="btn btn-outline-warning" type="submit">Recalculate Elo</button></form><br />-->
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+<form action="{% url 'reset_pw' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="hidden" name="token" value="{{token}}">
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

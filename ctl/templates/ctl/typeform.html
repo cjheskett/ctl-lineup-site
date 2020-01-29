@@ -1,0 +1,7 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+    {% if message %} <p> {{message|safe}} </p> {% endif %}<br />
+    <p>Please double check your lineup is correct before sending it in!</p>
+    <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+{% endblock %}

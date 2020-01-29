@@ -1,0 +1,27 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+        <title>Kamarill.com</title>
+        {% if not_auth %} <p>Your account needs to be authenticated. Contact Kamarill#9150 on Discord.</p>
+        {% else %}
+            {% if user.is_authenticated %}
+                <p>You are logged in as {{user.username}}.</p>
+            {% else %}
+                <p>If you're seeing this, please contact me (Kamarill) ASAP.</p>
+            {% endif %}
+            {% if not admin %}
+            <a class="btn btn-outline-primary" href = "{% url 'submit_lineup' %}">Submit lineup</a><br />
+            <a class="btn btn-outline-primary" href = "{% url 'submit_match_report' %}">Submit match report</a><br />
+            <a class="btn btn-outline-primary" href = "{% url 'roster_test' %}">View your roster</a><br />
+            {% endif %}
+            <a class="btn btn-outline-primary" href = "{% url 'add_player' %}">Add a player to a roster</a><br />
+            <a class="btn btn-outline-primary" href = "{% url 'edit_player' %}">Edit a player on a roster</a><br />
+            <a class="btn btn-outline-primary" href = "{% url 'remove_player' %}">Remove a player from your roster</a><br />
+            {% if admin %}
+                <a class="btn btn-outline-warning" href = "{% url 'view_lineups' %}">Generate lineup code</a><br />
+                <a class="btn btn-outline-warning" href = "{% url 'view_match_reports' %}">View match reports</a><br />
+            {% endif %}
+        {% endif %}
+        <a class="btn btn-outline-danger" href = "{% url 'logout' %}">Logout</a><br />
+
+{% endblock %}

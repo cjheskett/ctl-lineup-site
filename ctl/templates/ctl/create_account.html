@@ -1,0 +1,12 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+        {% if message %} {{ message|safe }} {% endif %}
+        <form action = "{% url 'create_account' %}" method="post">
+            {% csrf_token %}
+            Username: <input name="username" /><br />
+            Password: <input name="password" type="password"/><br />
+            Email (optional): <input name="email" value="" /><br />
+            <input value='Submit' type='submit'>
+        </form>
+{% endblock %}

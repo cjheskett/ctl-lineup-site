@@ -1,0 +1,142 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+<title>Kamarill.com / Submit match report</title>
+
+    {% if lineup %}
+        <form action = "{% url 'submit_match_report' %}" method="post">
+            <input type="hidden" name="week" value="{{week.id}}">
+            {% if message %} <p> {{ message }} </p>{% endif %}
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="set1">Set 1</label>
+                <select class ="form-control" id="set1" name="set1" aria-describedby="set1map">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+                </select>
+                <small id="set1map" class="form-text text-muted">{{lineup.set1}} vs {{opp_lineup.set1}} - Map: {{maps.0}}</small>
+            </div>
+            <div class="form-group">
+            <label for="set2">Set 2</label>
+                <select class="form-control" id="set2" name="set2" aria-describedby="set2map">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+                </select>
+                <small id="set2map" class="form-text text-muted">{{lineup.set2}} vs {{opp_lineup.set2}} - Map: {{maps.1}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set3">Set 3</label>
+                <select class="form-control" id="set3" name="set3" aria-describedby="set3map">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+                </select>
+                <small id="set3map" class="form-text text-muted">{{lineup.set3}} vs {{opp_lineup.set3}} - Map: {{maps.2}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set4">Set 4</label>
+                <select class="form-control" id="set4" name="set4" aria-describedby="set4map">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+                </select>
+                <small id="set4map" class="form-text text-muted">{{lineup.set4}} vs {{opp_lineup.set4}} - Map: {{maps.3}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set5">Set 5</label>
+                <select class="form-control" id="set5" name="set5" aria-describedby="set5map">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+                </select>
+                <small id="set5map" class="form-text text-muted">{{lineup.set5}} vs {{opp_lineup.set5}} - Map: {{maps.4}}</small>
+            </div>
+            <div class="form-group">
+                <label for="set6">Set 6</label>
+                <select class="form-control" id="set6" name="set6" aria-describedby="set6map">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+                </select>
+                <small id="set6map" class="form-text text-muted">{{lineup.set6}} vs {{opp_lineup.set6}} - Map: {{maps.5}}</small>
+            </div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+		<label for="set71">Set 7.1</label>
+       <select class="form-control" id="set71" name="set71" aria-describedby="set71players">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+        </select>
+        <small id="set71players" class="form-text text-muted">{{lineup.set7}} vs {{opp_lineup.set7}}</small>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="set71map">Set 7.1 Map:</label>
+      <input name="set71map" class="form-control" id="set71map" value="{{maps.6}}">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+		<label for="set72">Set 7.2</label>
+       <select class="form-control" id="set72" name="set72" aria-describedby="set72players">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+        </select>
+        <small id="set72players" class="form-text text-muted">{{lineup.set7}} vs {{opp_lineup.set7}}</small>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="set72map">Set 7.2 Map</label>
+      <input name="set72map" class="form-control" id="set72map">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+		<label for="set73">Set 7.3</label>
+       <select class="form-control" id="set73" name="set73" aria-describedby="set73players">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss</option>
+                    <option value="admin">Admin Decision</option>
+                    <option value="na">Not Played (2-0 Win)</option>
+        </select>
+        <small id="set73players" class="form-text text-muted">{{lineup.set7}} vs {{opp_lineup.set7}}</small>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="set73map">Set 7.3 Map (Leave blank if not played)</label>
+      <input name="set73map" class="form-control" id="set73map">
+    </div>
+</div>
+</div>
+<div class="form-group">
+    <label for="comments">Comments (Walkover proof, etc.)</label>
+    <textarea class="form-control" id="comments" rows="3" name="comments"></textarea>
+  </div>
+    <div class="form-row">
+        <div></div>
+        <div class="form-group col-md-4">
+            <input class="form-control" value='Submit' type='submit'>
+        </div>
+        <div></div>
+    </div>
+        </form>
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+{% elif comments %}
+    <p>Your match report has been submitted. Thanks!</p>
+    <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+{% else %}
+        <form action = "{% url 'submit_match_report' %}" method="post">
+            {% if message %} <p> {{ message }} </p>{% endif %}
+            {% csrf_token %}
+            Week:
+                <select name="week">
+                    {% for w in weeks %}
+                        <option value="{{w.id}}">{{w}}</option>
+                    {% endfor %}
+                </select><br />
+            <input value='Submit' type='submit'>
+        </form><br />
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a><br />
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+<title>Kamarill.com / View lineups (blank)</title>
+    {% if matchups %}
+    <p>To copy, just click on the text box, then Ctrl+A, Ctrl+C</p>
+    <p>LP Code:</p><br />
+        <textarea rows="4" cols="50">
+==={% templatetag openvariable %}HiddenSort|Week {{week}}{% templatetag closevariable %}===
+{% templatetag openvariable %}Box{% templatetag closevariable %}
+{% templatetag openvariable %}TeamMatch
+|width=300
+|team1={{first_matchup.0.wiki_name}}
+|team2={{first_matchup.1.wiki_name}}
+|teamwin=
+|date
+&lt;!--Match 1 --&gt;
+|m1p1= [[File:Platinum-medium.png|17px]] |m1p1race= |m1p1flag=ff |m1p1link=false
+|m1p2= [[File:Platinum-medium.png|17px]] |m1p2race= |m1p2flag=ff |m1p2link=false
+|m1map={{maps.0}}
+|m1win=
+&lt;!--Match 2 --&gt;
+|m2p1= [[File:Platinum-medium.png|17px]]  |m2p1race= |m2p1flag=ff |m2p1link=false
+|m2p2= [[File:Platinum-medium.png|17px]]  |m2p2race= |m2p2flag=ff |m2p2link=false
+|m2map={{maps.1}}
+|m2win=
+&lt;!--Match 3 --&gt;
+|m3p1= [[File:Diamond-2-3.png|17px]] |m3p1race= |m3p1flag=ff |m3p1link=false
+|m3p2= [[File:Diamond-2-3.png|17px]] |m3p2race= |m3p2flag=ff |m3p2link=false
+|m3map={{maps.2}}
+|m3win=
+&lt;!--Match 4--&gt;
+|m4p1= [[File:Diamond-2-3.png|17px]]  |m4p1race= |m4p1flag=ff |m4p1link=false
+|m4p2= [[File:Diamond-2-3.png|17px]]  |m4p2race= |m4p2flag=ff |m4p2link=false
+|m4map={{maps.3}}
+|m4win=
+&lt;!--Match 5--&gt;
+|m5p1= [[File:Diamond-medium.png|17px]]  |m5p1race= |m5p1flag=ff |m5p1link=false
+|m5p2= [[File:Diamond-medium.png|17px]]  |m5p2race= |m5p2flag=ff |m5p2link=false
+|m5map={{maps.4}}
+|m5win=
+&lt;!--Match 6--&gt;
+|m6p1= [[File:Diamond-medium.png|17px]]  |m6p1race= |m6p1flag=ff |m6p1link=false
+|m6p2= [[File:Diamond-medium.png|17px]]  |m6p2race= |m6p2flag=ff |m6p2link=false
+|m6map={{maps.5}}
+|m6win=
+&lt;!--Match 7--&gt;
+|ace1p1= [[File:MasterMedium.png|17px]]  |ace1p1race= |ace1p1flag=ff |ace1p1link=false
+|ace1p2= [[File:MasterMedium.png|17px]]  |ace1p2race= |ace1p2flag=ff |ace1p2link=false
+|ace1map={{maps.6}}
+|ace1win=
+&lt;!--Match 8--&gt;
+|ace2p1= [[File:MasterMedium.png|17px]] |ace2p1race= |ace2p1flag=ff |ace2p1link=false
+|ace2p2=[[File:MasterMedium.png|17px]]  |ace2p2race= |ace2p2flag=ff |ace2p2link=false
+|ace2map=
+|ace2win=
+&lt;!--Match 9--&gt;
+|ace3p1= [[File:MasterMedium.png|17px]] |ace3p1race= |ace3p1flag=ff |ace3p1link=false
+|ace3p2=[[File:MasterMedium.png|17px]]  |ace3p2race= |ace3p2flag=ff |ace3p2link=false
+|ace3map=
+|ace3win=
+{% templatetag closevariable %}
+{% for matchup in matchups %}
+{% templatetag openvariable %}Box|break|{% templatetag closevariable %}
+{% templatetag openvariable %}TeamMatch
+|width=300
+|team1={{matchup.0.wiki_name}}
+|team2={{matchup.1.wiki_name}}
+|teamwin=
+|date
+&lt;!--Match 1 --&gt;
+|m1p1= [[File:Platinum-medium.png|17px]] |m1p1race= |m1p1flag=ff |m1p1link=false
+|m1p2= [[File:Platinum-medium.png|17px]] |m1p2race= |m1p2flag=ff |m1p2link=false
+|m1map={{maps.0}}
+|m1win=
+&lt;!--Match 2 --&gt;
+|m2p1= [[File:Platinum-medium.png|17px]]  |m2p1race= |m2p1flag=ff |m2p1link=false
+|m2p2= [[File:Platinum-medium.png|17px]]  |m2p2race= |m2p2flag=ff |m2p2link=false
+|m2map={{maps.1}}
+|m2win=
+&lt;!--Match 3 --&gt;
+|m3p1= [[File:Diamond-2-3.png|17px]] |m3p1race= |m3p1flag=ff |m3p1link=false
+|m3p2= [[File:Diamond-2-3.png|17px]] |m3p2race= |m3p2flag=ff |m3p2link=false
+|m3map={{maps.2}}
+|m3win=
+&lt;!--Match 4--&gt;
+|m4p1= [[File:Diamond-2-3.png|17px]]  |m4p1race= |m4p1flag=ff |m4p1link=false
+|m4p2= [[File:Diamond-2-3.png|17px]]  |m4p2race= |m4p2flag=ff |m4p2link=false
+|m4map={{maps.3}}
+|m4win=
+&lt;!--Match 5--&gt;
+|m5p1= [[File:Diamond-medium.png|17px]]  |m5p1race= |m5p1flag=ff |m5p1link=false
+|m5p2= [[File:Diamond-medium.png|17px]]  |m5p2race= |m5p2flag=ff |m5p2link=false
+|m5map={{maps.4}}
+|m5win=
+&lt;!--Match 6--&gt;
+|m6p1= [[File:Diamond-medium.png|17px]]  |m6p1race= |m6p1flag=ff |m6p1link=false
+|m6p2= [[File:Diamond-medium.png|17px]]  |m6p2race= |m6p2flag=ff |m6p2link=false
+|m6map={{maps.5}}
+|m6win=
+&lt;!--Match 7--&gt;
+|ace1p1= [[File:MasterMedium.png|17px]]  |ace1p1race= |ace1p1flag=ff |ace1p1link=false
+|ace1p2= [[File:MasterMedium.png|17px]]  |ace1p2race= |ace1p2flag=ff |ace1p2link=false
+|ace1map={{maps.6}}
+|ace1win=
+&lt;!--Match 8--&gt;
+|ace2p1= [[File:MasterMedium.png|17px]] |ace2p1race= |ace2p1flag=ff |ace2p1link=false
+|ace2p2=[[File:MasterMedium.png|17px]]  |ace2p2race= |ace2p2flag=ff |ace2p2link=false
+|ace2map=
+|ace2win=
+&lt;!--Match 9--&gt;
+|ace3p1= [[File:MasterMedium.png|17px]] |ace3p1race= |ace3p1flag=ff |ace3p1link=false
+|ace3p2=[[File:MasterMedium.png|17px]]  |ace3p2race= |ace3p2flag=ff |ace3p2link=false
+|ace3map=
+|ace3win=
+{% templatetag closevariable %}
+{% endfor %}{% templatetag openvariable %}Box|end{% templatetag closevariable %}
+</textarea><br /><br />
+    {% else %}
+        <form action = "view_lineups_blank" method="post">
+            {% csrf_token %}
+            {% if message %} <p> {{ message | safe }} </p>{% endif %}
+            Week:
+                <select name="week">
+                    {% for w in weeks %}
+                        <option value="{{w.id}}">{{w}}</option>
+                    {% endfor %}
+                </select><br />
+            <input value='Submit' type='submit'>
+        </form><br />
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a><br />
+    {% endif %}
+{% endblock %}

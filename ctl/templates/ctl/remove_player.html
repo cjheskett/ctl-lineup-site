@@ -1,0 +1,24 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+        <title>Kamarill.com / Remove a player</title>
+            <form action = "{% url 'remove_player' %}" method="post">
+            {% if message %} <p> {{ message|safe }} </p>{% endif %}
+            {% csrf_token %}
+            {% if player %}
+                <input type='hidden' name="id" value='{{player.id}}' />
+                <p>You are about to remove {{player.sc2_name}} | {{player.bnet_name}}. Click the Submit button to confirm this.</p>
+            {% elif roster %}
+                Select a player to remove:
+                    <select name="player">
+                    {% for player in roster %}
+                        <option value='{{player.id}}'>{{player}}</option>
+                    {% endfor %}
+                    </select><br />
+            {% endif %}
+                <input value='Submit' type='submit'>
+            </form>
+
+
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+{% endblock %}

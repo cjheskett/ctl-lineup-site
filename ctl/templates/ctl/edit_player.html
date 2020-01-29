@@ -1,0 +1,56 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+            <title>Kamarill.com / Edit a player</title>
+            <form action = "{% url 'edit_player' %}" method="post">
+            {% if message %} <p> {{ message|safe }} </p>{% endif %}
+            {% csrf_token %}
+            {% if players %} <p>More than two players were found matching that name. Please either select the one you meant, or enter a new name below: </p><br />
+            {% for p in players %}
+                <a href = "{% url 'edit_player'%}?pid={{ p.id }}">{{ p.get_full_info }}</a><br />
+            {% endfor %}
+            <br/> <br/>
+            {% endif %}
+            {% if player %}
+                <input type='hidden' name="id" value='{{player.id}}' />
+                {% if teams %}
+                    Team:
+                        <select name="team">
+                            {% for team in teams %}
+                                <option value="{{team}}" {% if team == player.team %}selected{% endif %}>{{team}}</option>
+                            {% endfor %}
+                        </select><br />
+                {% else %}
+                    <input type="hidden" name="team" value="{{player.team}}" />
+                {% endif %}
+                Battle.net name and code (e.g. Kamarill#1362): <input name="bnet_name" value="{{player.bnet_name}}"><br />
+                SC2 Display Name: <input name="ctl_name" value="{{player.sc2_name}}"><br />
+                CTL/Enjin URL: <input name="ctl_url" value="{{player.ctl_url}}" type="url"><br />
+                League:
+                    <select name="league">
+                        <option value=0 {% if player.league == 0 %}selected{% endif %}>Bronze</option>
+                        <option value=1 {% if player.league == 1 %}selected{% endif %}>Silver</option>
+                        <option value=2 {% if player.league == 2 %}selected{% endif %}>Gold</option>
+                        <option value=3 {% if player.league == 3 %}selected{% endif %}>Platinum</option>
+                        <option value=4 {% if player.league == 4 %}selected{% endif %}>Diamond</option>
+                        <option value=5 {% if player.league == 5 %}selected{% endif %}>Master</option>
+                        <option value=6 {% if player.league == 6 %}selected{% endif %}>Grandmaster</option>
+                        <option value=7 {% if player.league == 7 %}selected{% endif %}>Inactive</option>
+                    </select><br />
+                Race:
+                    <select name="race"}>
+                        <option value='Z' {% if player.race == 'Z'%}selected{% endif %}>Zerg</option>
+                        <option value='T' {% if player.race == 'T'%}selected{% endif %}>Terran</option>
+                        <option value='P' {% if player.race == 'P'%}selected{% endif %}>Protoss</option>
+                        <option value='R' {% if player.race == 'R'%}selected{% endif %}>Random</option>
+                    </select><br />
+            {% else %}
+                Search for a player: <input name="player_search" /></p>
+                   <br />
+            {% endif %}
+                <input value='Submit' type='submit'>
+            </form>
+
+
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+{% endblock %}

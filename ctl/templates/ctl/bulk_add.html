@@ -1,0 +1,23 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+        <form action = "{% url 'bulk_add' team %}" method="post" id="why">
+            {% if message %} <p> {{ message|safe }} </p>{% endif %}
+            {% csrf_token %}
+            League:
+                <select name="league">
+                    <option value=0>Bronze</option>
+                    <option value=1>Silver</option>
+                    <option value=2>Gold</option>
+                    <option value=3>Platinum</option>
+                    <option value=4>Diamond</option>
+                    <option value=5>Master</option>
+                    <option value=6>Grandmaster</option>
+                </select><br />
+            <input value='Submit' type='submit' name='submit'>
+        </form>
+        <br />
+        Data:
+            <textarea name = "text" form="why" rows="50" cols="50"></textarea>
+        <a href = "{% url 'index' %}">Return to index</a>
+{% endblock %}

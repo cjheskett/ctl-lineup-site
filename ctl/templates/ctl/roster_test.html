@@ -1,0 +1,89 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+<title>Kamarill.com / View your roster</title>
+{% if golds %}
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-dark"><img src="http://i.imgur.com/y9RuBRK.png" /><img src="http://i.imgur.com/zX1OLuQ.png" /><img src="http://i.imgur.com/gPA7DHA.png" /></li>
+    {% for player in golds %}
+        <li class="list-group-item" style="background-color: #212121">
+            {% if player.race == 'T' %}
+                <img src="http://i.imgur.com/PZaHh.png" />
+            {% elif player.race == 'Z' %}
+                <img src="http://i.imgur.com/HRNlj.png" />
+            {% elif player.race == 'P' %}
+                <img src="http://i.imgur.com/lY0rg.png" />
+            {% else %}
+                <img src="http://i.imgur.com/y6wDt.png" />
+            {% endif %}
+
+            <a href='{{player.ctl_url}}'>{{ player }}</a></li>
+    {% endfor %}
+
+        <li class="list-group-item list-group-item-dark"><img src="http://i.imgur.com/r3lwg4M.png" /></li>
+    {% for player in plats %}
+        <li class="list-group-item" style="background-color: #212121">
+            {% if player.race == 'T' %}
+                <img src="http://i.imgur.com/PZaHh.png" />
+            {% elif player.race == 'Z' %}
+                <img src="http://i.imgur.com/HRNlj.png" />
+            {% elif player.race == 'P' %}
+                <img src="http://i.imgur.com/lY0rg.png" />
+            {% else %}
+                <img src="http://i.imgur.com/y6wDt.png" />
+            {% endif %}
+
+            <a href='{{player.ctl_url}}'>{{ player }}</a></li>
+    {% endfor %}
+
+        <li class="list-group-item list-group-item-dark"><img src="http://i.imgur.com/2dP4Sju.png" /></li>
+    {% for player in diamonds %}
+        <li class="list-group-item" style="background-color: #212121">
+            {% if player.race == 'T' %}
+                <img src="http://i.imgur.com/PZaHh.png" />
+            {% elif player.race == 'Z' %}
+                <img src="http://i.imgur.com/HRNlj.png" />
+            {% elif player.race == 'P' %}
+                <img src="http://i.imgur.com/lY0rg.png" />
+            {% else %}
+                <img src="http://i.imgur.com/y6wDt.png" />
+            {% endif %}
+
+            <a href='{{player.ctl_url}}'>{{ player }}</a></li>
+    {% endfor %}
+
+        <li class="list-group-item list-group-item-dark"><img src="http://i.imgur.com/uugctDk.png" /></li>
+    {% for player in masters %}
+        <li class="list-group-item" style="background-color: #212121">
+            {% if player.race == 'T' %}
+                <img src="http://i.imgur.com/PZaHh.png" />
+            {% elif player.race == 'Z' %}
+                <img src="http://i.imgur.com/HRNlj.png" />
+            {% elif player.race == 'P' %}
+                <img src="http://i.imgur.com/lY0rg.png" />
+            {% else %}
+                <img src="http://i.imgur.com/y6wDt.png" />
+            {% endif %}
+
+            <a href='{{player.ctl_url}}'>{{ player }}</a></li>
+    {% endfor %}
+    <li class="list-group-item list-group-item-dark">Inactive</li>
+    {% for player in bench %}
+        <li class="list-group-item" style="background-color: #212121">
+            {% if player.race == 'T' %}
+                <img src="http://i.imgur.com/PZaHh.png" />
+            {% elif player.race == 'Z' %}
+                <img src="http://i.imgur.com/HRNlj.png" />
+            {% elif player.race == 'P' %}
+                <img src="http://i.imgur.com/lY0rg.png" />
+            {% else %}
+                <img src="http://i.imgur.com/y6wDt.png" />
+            {% endif %}
+
+            <a href='{{player.ctl_url}}'>{{ player }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>This team doesn't exist.</p>
+{% endif %}
+{% endblock %}

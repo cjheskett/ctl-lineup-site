@@ -1,0 +1,106 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+    {% if team %}
+        <form action = "{% url 'typeform' %}" method="post">
+            {% if message %} <p> {{ message }} </p>{% endif %}
+            {% csrf_token %}
+            Set 1:
+                <select name="set1">
+                    <option value="goldlabel" disabled>---GOLDS AND LOWER---</option>
+                    {% for player in golds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                </select> {{maps.0}}<br />
+            Set 2:
+                <select name="set2">
+                    <option value="goldlabel" disabled>---GOLD AND LOWER---</option>
+                    {% for player in golds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM---</option>
+                    {% for player in plats %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                </select> {{maps.1}}<br />
+            Set 3:
+                <select name="set3">
+                    <option value="goldlabel" disabled>---GOLD AND LOWER---</option>
+                    {% for player in golds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM---</option>
+                    {% for player in plats %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                </select> {{maps.2}}<br />
+            Set 4:
+                <select name="set4">
+                    <option value="goldlabel" disabled>---GOLD AND LOWER---</option>
+                    {% for player in golds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM---</option>
+                    {% for player in plats %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                </select> {{maps.3}}<br />
+            Set 5:
+                <select name="set5">
+                    <option value="goldlabel" disabled>---GOLD AND LOWER---</option>
+                    {% for player in golds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM---</option>
+                    {% for player in plats %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                </select> {{maps.4}}<br />
+            Set 6:
+                <select name="set6">
+                    <option value="goldlabel" disabled>---GOLD AND LOWER---</option>
+                    {% for player in golds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM---</option>
+                    {% for player in plats %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                </select> {{maps.5}}<br />
+            Set 7:
+                <select name="set7">
+                    <option value="goldlabel" disabled>---GOLD AND LOWER---</option>
+                    {% for player in golds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="platlabel" disabled>---PLATINUM---</option>
+                    {% for player in plats %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="dialabel" disabled>---DIAMOND---</option>
+                    {% for player in diamonds %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                    <option value="masterlabel" disabled>---MASTERS---</option>
+                    {% for player in masters %}
+                        <option value="{{player.sc2_name}}">{{player}}</option>
+                    {% endfor %}
+                </select> {{maps.6}}<br />
+            <input value='Submit' type='submit'>
+        </form>
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+    {% endif %}
+    {% if message %} <p>{{message|safe}}</p> {% endif %}
+{% endblock %}

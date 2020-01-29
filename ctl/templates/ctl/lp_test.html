@@ -1,0 +1,63 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+    {% if team1 %}
+        &lt;!--Match 1 --&gt; <br />
+        |m1p1={{team1.set1.sc2_name}} [[File:Gold-medium.png|17px]] |m1p1race= |m1p1flag=ff |m1p1link=false <br />
+        |m1p2=[[File:Gold-medium.png|17px]] {{team2.set1.sc2_name}} |m1p2race= |m1p2flag=ff |m1p2link=false <br />
+        |m1map={{maps.0}} <br />
+        |m1win= <br />
+        &lt;!--Match 2 --&gt; <br />
+        |m2p1={{team1.set2.sc2_name}} [[File:Platinum-medium.png|17px]] |m2p1race= |m2p1flag=ff |m2p1link=false <br />
+        |m2p2=[[File:Platinum-medium.png|17px]] {{team2.set2.sc2_name}} |m2p2race= |m2p2flag=ff |m2p2link=false <br />
+        |m2map={{maps.1}} <br />
+        |m2win= <br />
+        &lt;!--Match 3 --&gt; <br />
+        |m3p1={{team1.set3.sc2_name}} [[File:Platinum-medium.png|17px]] |m3p1race= |m3p1flag=ff |m3p1link=false <br />
+        |m3p2=[[File:Platinum-medium.png|17px]] {{team2.set3.sc2_name}} |m3p2race= |m3p2flag=ff |m3p2link=false <br />
+        |m3map={{maps.2}} <br />
+        |m3win= <br />
+        &lt;!--Match 4--&gt; <br />
+        |m4p1={{team1.set4.sc2_name}} [[File:Diamond-2-3.png|17px]] |m4p1race= |m4p1flag=ff |m4p1link=false <br />
+        |m4p2=[[File:Diamond-2-3.png|17px]] {{team2.set4.sc2_name}} |m4p2race= |m4p2flag=ff |m4p2link=false <br />
+        |m4map={{maps.3}} <br />
+        |m4win= <br />
+        &lt;!--Match 5--&gt; <br />
+        |m5p1={{team1.set5.sc2_name}} [[File:Diamond-medium.png|17px]] |m5p1race= |m5p1flag=ff |m5p1link=false <br />
+        |m5p2=[[File:Diamond-medium.png|17px]] {{team2.set5.sc2_name}} |m5p2race= |m5p2flag=ff |m5p2link=false <br />
+        |m5map={{maps.4}} <br />
+        |m5win= <br />
+        &lt;!--Match 6--&gt; <br />
+        |m6p1={{team1.set6.sc2_name}} [[File:Diamond-medium.png|17px]] |m6p1race= |m6p1flag=ff |m6p1link=false <br />
+        |m6p2=[[File:Diamond-medium.png|17px]] {{team2.set6.sc2_name}} |m6p2race= |m6p2flag=ff |m6p2link=false <br />
+        |m6map={{maps.5}} <br />
+        |m6win= <br />
+        &lt;!--Match 7--&gt; <br />
+        |ace1p1={{team1.set7.sc2_name}} [[File:MasterMedium.png|17px]] |ace1p1race= |ace1p1flag=ff |ace1p1link=false <br />
+        |ace1p2=[[File:MasterMedium.png|17px]] {{team2.set7.sc2_name}} |ace1p2race= |ace1p2flag=ff |ace1p2link=false <br />
+        |ace1map={{maps.6}} <br />
+        |ace1win= <br />
+        &lt;!--Match 8--&gt; <br />
+        |ace2p1={{team1.set7.sc2_name}} [[File:MasterMedium.png|17px]] |ace2p1race= |ace2p1flag=ff |ace2p1link=false <br />
+        |ace2p2=[[File:MasterMedium.png|17px]] {{team2.set7.sc2_name}} |ace2p2race= |ace2p2flag=ff |ace2p2link=false <br />
+        |ace2map= <br />
+        |ace2win= <br />
+        &lt;!--Match 9--&gt; <br />
+        |ace3p1={{team1.set7.sc2_name}} [[File:MasterMedium.png|17px]] |ace3p1race= |ace3p1flag=ff |ace3p1link=false <br />
+        |ace3p2=[[File:MasterMedium.png|17px]] {{team2.set7.sc2_name}} |ace3p2race= |ace3p2flag=ff |ace3p2link=false <br />
+        |ace3map= <br />
+        |ace3win= <br />
+    {% else %}
+        <form action = "{% url 'view_lineups' %}" method="post">
+            {% if message %} <p> {{ message }} </p>{% endif %}
+            {% csrf_token %}
+            Matchup:
+                <select name="matchup">
+                    {% for m in matchups %}
+                        <option value="{{m.id}}">{{m}}</option>
+                    {% endfor %}
+                </select><br />
+            <input value='Submit' type='submit'>
+        </form>
+    {% endif %}
+{% endblock %}

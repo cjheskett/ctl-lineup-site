@@ -1,0 +1,69 @@
+{% extends 'ctl/base.html' %}
+{% block content %}
+        <title>Kamarill.com / Add a player</title>
+        <form action = "{% url 'add_player' %}" method="post">
+            {% if wiki %}
+                <p> {{ wiki }}</p> <br />
+                <p>Congratulations, your application has been accepted. You will be placed onto the {{np_team}} team roster. Feel free to reach out to {% if no_team %}a{% else %}your{% endif %} captain to be placed on the weekly lineup. To become more involved in the community feel free to join our Discord! https://discord.gg/7SJyyZe</p>
+            {% endif %}
+            {% if message %} <p> {{ message }} </p>{% endif %}
+            {% csrf_token %}
+            {% if teams %}
+              <div class="form-group">
+              <label for="team">Team</label>
+                    <select class="form-control" id="team" name="team">
+                        {% for team in teams %}
+                            <option value="{{team}}">{{team}}</option>
+                        {% endfor %}
+                    </select>
+              </div>
+            {% elif team %}
+                <p>You are the captain of {{team.team_abrv}}</p><br/>
+                <input type="hidden" name="team" value="{{team}}" />
+            {% endif %}
+            <div class="form-group">
+              <label for="bnet_name">Battle.net name and code (e.g. Kamarill#1362)</label>
+              <input class="form-control" name="bnet_name" id="bnet_name" required>
+            </div>
+            <div class="form-group">
+              <label for="ctl_name">SC2 Display Name</label>
+              <input class="form-control" name="ctl_name" id="ctl_name" required>
+            </div>
+            <div class="form-group">
+              <label for="ctl_url">CTL/Enjin URL</label>
+              <input class="form-control" name="ctl_url" type="url" id="ctl_url" required>
+            </div>
+            <div class="form-group">
+            <label for="league">League</label>
+                <select class="form-control" name="league" id="league">
+                    <option value=0>Bronze</option>
+                    <option value=1>Silver</option>
+                    <option value=2>Gold</option>
+                    <option value=3>Platinum</option>
+                    <option value=4>Diamond</option>
+                    <option value=5>Master</option>
+                    <option value=6>Grandmaster</option>
+                </select>
+            </div>
+            <div class="form-group">
+            <label for="race">Race</label>
+                <select class="form-control" id="race" name="race">
+                    <option value='Z'>Zerg</option>
+                    <option value='T'>Terran</option>
+                    <option value='P'>Protoss</option>
+                    <option value='R'>Random</option>
+                </select>
+            </div>
+            <div class="form-group">
+            <input class="form-control" value='Submit' type='submit'>
+        </form>
+        {% if teams %}
+            <br />
+            <br />
+            <textarea>Hello and thank you for your interest in joining the CTL. Unfortunately, we cannot currently accept your application because you do not have the required amount of matches. Please complete at least 20 ranked matches in the ongoing season and respond back to this comment once that has been completed. Good luck and have fun!
+</textarea>
+            <br />
+            <br />
+        {% endif %}
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+{% endblock %}

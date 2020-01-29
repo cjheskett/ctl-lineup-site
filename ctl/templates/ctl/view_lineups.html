@@ -1,0 +1,147 @@
+{% extends 'ctl/base.html' %}
+
+{% block content %}
+<title>Kamarill.com / View lineups</title>
+
+    {% if matchups %}
+    <p>To copy, just click on the text box, then Ctrl+A, Ctrl+C</p>
+    <p>LP Code:</p><br />
+        <textarea rows="4" cols="50">
+==={% templatetag openvariable %}HiddenSort|Week {{week}}{% templatetag closevariable %}===
+{% templatetag openvariable %}Box{% templatetag closevariable %}
+{% templatetag openvariable %}TeamMatch
+|width=300
+|team1={{first_lineup.0.team.wiki_name}}
+|team2={{first_lineup.1.team.wiki_name}}
+|teamwin=
+|date
+&lt;!--Match 1 --&gt;
+|m1p1={{first_lineup.0.set1.sc2_name}}{% if first_lineup.1.set1.id == 837 and first_lineup.0.set1.id != 837 %}*{% endif %} [[File:Platinum-medium.png|17px]] |m1p1race={{first_lineup.0.set1.race}} |m1p1flag=ff |m1p1link=false
+|m1p2=[[File:Platinum-medium.png|17px]] {{first_lineup.1.set1.sc2_name}}{% if first_lineup.0.set1.id == 837 and first_lineup.1.set1.id != 837 %}*{% endif %} |m1p2race={{first_lineup.1.set1.race}} |m1p2flag=ff |m1p2link=false
+|m1map={{maps.0}}
+|m1win={% if first_lineup.0.set1.id == 837 and first_lineup.1.set1.id != 837 %}2{% elif first_lineup.1.set1.id == 837 and first_lineup.0.set1.id != 837 %}1{% endif %}
+&lt;!--Match 2 --&gt;
+|m2p1={{first_lineup.0.set2.sc2_name}}{% if first_lineup.1.set2.id == 837 and first_lineup.0.set2.id != 837 %}*{% endif %} [[File:Platinum-medium.png|17px]] |m2p1race={{first_lineup.0.set2.race}} |m2p1flag=ff |m2p1link=false
+|m2p2=[[File:Platinum-medium.png|17px]] {{first_lineup.1.set2.sc2_name}}{% if first_lineup.0.set2.id == 837 and first_lineup.1.set2.id != 837 %}*{% endif %} |m2p2race={{first_lineup.1.set2.race}} |m2p2flag=ff |m2p2link=false
+|m2map={{maps.1}}
+|m2win={% if first_lineup.0.set2.id == 837 and first_lineup.1.set2.id != 837 %}2{% elif first_lineup.1.set2.id == 837 and first_lineup.0.set2.id != 837 %}1{% endif %}
+&lt;!--Match 3 --&gt;
+|m3p1={{first_lineup.0.set3.sc2_name}}{% if first_lineup.1.set3.id == 837 and first_lineup.0.set3.id != 837 %}*{% endif %} [[File:Diamond-2-3.png|17px]] |m3p1race={{first_lineup.0.set3.race}} |m3p1flag=ff |m3p1link=false
+|m3p2=[[File:Diamond-2-3.png|17px]] {{first_lineup.1.set3.sc2_name}}{% if first_lineup.0.set3.id == 837 and first_lineup.1.set3.id != 837 %}*{% endif %} |m3p2race={{first_lineup.1.set3.race}} |m3p2flag=ff |m3p2link=false
+|m3map={{maps.2}}
+|m3win={% if first_lineup.0.set3.id == 837 and first_lineup.1.set3.id != 837 %}2{% elif first_lineup.1.set3.id == 837 and first_lineup.0.set3.id != 837 %}1{% endif %}
+&lt;!--Match 4--&gt;
+|m4p1={{first_lineup.0.set4.sc2_name}}{% if first_lineup.1.set4.id == 837 and first_lineup.0.set3.id != 837 %}*{% endif %} [[File:Diamond-2-3.png|17px]] |m4p1race={{first_lineup.0.set4.race}} |m4p1flag=ff |m4p1link=false
+|m4p2=[[File:Diamond-2-3.png|17px]] {{first_lineup.1.set4.sc2_name}}{% if first_lineup.0.set4.id == 837 and first_lineup.1.set4.id != 837 %}*{% endif %} |m4p2race={{first_lineup.1.set4.race}} |m4p2flag=ff |m4p2link=false
+|m4map={{maps.3}}
+|m4win={% if first_lineup.0.set4.id == 837 and first_lineup.1.set4.id != 837 %}2{% elif first_lineup.1.set4.id == 837 and first_lineup.0.set4.id != 837 %}1{% endif %}
+&lt;!--Match 5--&gt;
+|m5p1={{first_lineup.0.set5.sc2_name}}{% if first_lineup.1.set5.id == 837 and first_lineup.0.set3.id != 837 %}*{% endif %} [[File:Diamond-medium.png|17px]] |m5p1race={{first_lineup.0.set5.race}} |m5p1flag=ff |m5p1link=false
+|m5p2=[[File:Diamond-medium.png|17px]] {{first_lineup.1.set5.sc2_name}}{% if first_lineup.0.set5.id == 837 and first_lineup.1.set5.id != 837 %}*{% endif %} |m5p2race={{first_lineup.1.set5.race}} |m5p2flag=ff |m5p2link=false
+|m5map={{maps.4}}
+|m5win={% if first_lineup.0.set5.id == 837 and first_lineup.1.set5.id != 837 %}2{% elif first_lineup.1.set5.id == 837 and first_lineup.0.set5.id != 837 %}1{% endif %}
+&lt;!--Match 6--&gt;
+|m6p1={{first_lineup.0.set6.sc2_name}}{% if first_lineup.1.set6.id == 837 and first_lineup.0.set3.id != 837 %}*{% endif %} [[File:Diamond-medium.png|17px]] |m6p1race={{first_lineup.0.set6.race}} |m6p1flag=ff |m6p1link=false
+|m6p2=[[File:Diamond-medium.png|17px]] {{first_lineup.1.set6.sc2_name}}{% if first_lineup.0.set6.id == 837 and first_lineup.1.set6.id != 837 %}*{% endif %} |m6p2race={{first_lineup.1.set6.race}} |m6p2flag=ff |m6p2link=false
+|m6map={{maps.5}}
+|m6win={% if first_lineup.0.set6.id == 837 and first_lineup.1.set6.id != 837 %}2{% elif first_lineup.1.set6.id == 837 and first_lineup.0.set6.id != 837 %}1{% endif %}
+&lt;!--Match 7--&gt
+|ace1p1={{first_lineup.0.set7.sc2_name}}{% if first_lineup.1.set7.id == 837 and first_lineup.0.set3.id != 837 %}*{% endif %} [[File:MasterMedium.png|17px]] |ace1p1race={{first_lineup.0.set7.race}} |ace1p1flag=ff |ace1p1link=false
+|ace1p2=[[File:MasterMedium.png|17px]] {{first_lineup.1.set7.sc2_name}}{% if first_lineup.0.set7.id == 837 and first_lineup.1.set7.id != 837 %}*{% endif %} |ace1p2race={{first_lineup.1.set7.race}} |ace1p2flag=ff |ace1p2link=false
+|ace1map={{maps.6}}
+|ace1win={% if first_lineup.0.set7.id == 837 and first_lineup.1.set7.id != 837 %}2{% elif first_lineup.1.set7.id == 837 and first_lineup.0.set7.id != 837 %}1{% endif %}
+&lt;!--Match 8--&gt;
+|ace2p1={{first_lineup.0.set7.sc2_name}}{% if first_lineup.1.set7.id == 837 and first_lineup.0.set3.id != 837 %}*{% endif %} [[File:MasterMedium.png|17px]] |ace2p1race={{first_lineup.0.set7.race}} |ace2p1flag=ff |ace2p1link=false
+|ace2p2=[[File:MasterMedium.png|17px]] {{first_lineup.1.set7.sc2_name}}{% if first_lineup.0.set7.id == 837 and first_lineup.1.set7.id != 837 %}*{% endif %} |ace2p2race={{first_lineup.1.set7.race}} |ace2p2flag=ff |ace2p2link=false
+|ace2map=
+|ace2win={% if first_lineup.0.set7.id == 837 and first_lineup.1.set7.id != 837 %}2{% elif first_lineup.1.set7.id == 837 and first_lineup.0.set7.id != 837 %}1{% endif %}
+&lt;!--Match 9--&gt;
+|ace3p1={{first_lineup.0.set7.sc2_name}} [[File:MasterMedium.png|17px]] |ace3p1race={{first_lineup.0.set7.race}} |ace3p1flag=ff |ace3p1link=false
+|ace3p2=[[File:MasterMedium.png|17px]] {{first_lineup.1.set7.sc2_name}} |ace3p2race={{first_lineup.1.set7.race}} |ace3p2flag=ff |ace3p2link=false
+|ace3map=
+|ace3win=
+{% templatetag closevariable %}
+{% for matchup in matchups %}
+{% templatetag openvariable %}Box|break|{% templatetag closevariable %}
+{% templatetag openvariable %}TeamMatch
+|width=300
+|team1={{matchup.0.team.wiki_name}}
+|team2={{matchup.1.team.wiki_name}}
+|teamwin=
+|date
+&lt;!--Match 1--&gt;
+|m1p1={{matchup.0.set1.sc2_name}}{% if matchup.1.set1.id == 837 and matchup.0.set1.id != 837 %}*{% endif %} [[File:Platinum-medium.png|17px]] |m1p1race={{matchup.0.set1.race}} |m1p1flag=ff |m1p1link=false
+|m1p2=[[File:Platinum-medium.png|17px]] {{matchup.1.set1.sc2_name}}{% if matchup.0.set1.id == 837 and matchup.1.set1.id != 837 %}*{% endif %} |m1p2race={{matchup.1.set1.race}} |m1p2flag=ff |m1p2link=false
+|m1map={{maps.0}}
+|m1win={% if matchup.0.set1.id == 837 and matchup.1.set1.id != 837 %}2{% elif matchup.1.set1.id == 837 and matchup.0.set1.id != 837 %}1{% endif %}
+&lt;!--Match 2--&gt;
+|m2p1={{matchup.0.set2.sc2_name}}{% if matchup.1.set2.id == 837 and matchup.0.set2.id != 837 %}*{% endif %} [[File:Platinum-medium.png|17px]] |m2p1race={{matchup.0.set2.race}} |m2p1flag=ff |m2p1link=false
+|m2p2=[[File:Platinum-medium.png|17px]] {{matchup.1.set2.sc2_name}}{% if matchup.0.set2.id == 837 and matchup.1.set2.id != 837 %}*{% endif %} |m2p2race={{matchup.1.set2.race}} |m2p2flag=ff |m2p2link=false
+|m2map={{maps.1}}
+|m2win={% if matchup.0.set2.id == 837 and matchup.1.set2.id != 837 %}2{% elif matchup.1.set2.id == 837 and matchup.0.set2.id != 837 %}1{% endif %}
+&lt;!--Match 3--&gt;
+|m3p1={{matchup.0.set3.sc2_name}}{% if matchup.1.set3.id == 837 and matchup.0.set3.id != 837 %}*{% endif %} [[File:Diamond-2-3.png|17px]] |m3p1race={{matchup.0.set3.race}} |m3p1flag=ff |m3p1link=false
+|m3p2=[[File:Diamond-2-3.png|17px]] {{matchup.1.set3.sc2_name}}{% if matchup.0.set3.id == 837 and matchup.1.set3.id != 837 %}*{% endif %} |m3p2race={{matchup.1.set3.race}} |m3p2flag=ff |m3p2link=false
+|m3map={{maps.2}}
+|m3win={% if matchup.0.set3.id == 837 and matchup.1.set3.id != 837 %}2{% elif matchup.1.set3.id == 837 and matchup.0.set3.id != 837 %}1{% endif %}
+&lt;!--Match 4--&gt;
+|m4p1={{matchup.0.set4.sc2_name}}{% if matchup.1.set4.id == 837 and matchup.0.set3.id != 837 %}*{% endif %} [[File:Diamond-2-3.png|17px]] |m4p1race={{matchup.0.set4.race}} |m4p1flag=ff |m4p1link=false
+|m4p2=[[File:Diamond-2-3.png|17px]] {{matchup.1.set4.sc2_name}}{% if matchup.0.set4.id == 837 and matchup.1.set4.id != 837 %}*{% endif %} |m4p2race={{matchup.1.set4.race}} |m4p2flag=ff |m4p2link=false
+|m4map={{maps.3}}
+|m4win={% if matchup.0.set4.id == 837 and matchup.1.set4.id != 837 %}2{% elif matchup.1.set4.id == 837 and matchup.0.set4.id != 837 %}1{% endif %}
+&lt;!--Match 5--&gt;
+|m5p1={{matchup.0.set5.sc2_name}}{% if matchup.1.set5.id == 837 and matchup.0.set3.id != 837 %}*{% endif %} [[File:Diamond-medium.png|17px]] |m5p1race={{matchup.0.set5.race}} |m5p1flag=ff |m5p1link=false
+|m5p2=[[File:Diamond-medium.png|17px]] {{matchup.1.set5.sc2_name}}{% if matchup.0.set5.id == 837 and matchup.1.set5.id != 837 %}*{% endif %} |m5p2race={{matchup.1.set5.race}} |m5p2flag=ff |m5p2link=false
+|m5map={{maps.4}}
+|m5win={% if matchup.0.set5.id == 837 and matchup.1.set5.id != 837 %}2{% elif matchup.1.set5.id == 837 and matchup.0.set5.id != 837 %}1{% endif %}
+&lt;!--Match 6--&gt;
+|m6p1={{matchup.0.set6.sc2_name}}{% if matchup.1.set6.id == 837 and matchup.0.set3.id != 837 %}*{% endif %} [[File:Diamond-medium.png|17px]] |m6p1race={{matchup.0.set6.race}} |m6p1flag=ff |m6p1link=false
+|m6p2=[[File:Diamond-medium.png|17px]] {{matchup.1.set6.sc2_name}}{% if matchup.0.set6.id == 837 and matchup.1.set6.id != 837 %}*{% endif %} |m6p2race={{matchup.1.set6.race}} |m6p2flag=ff |m6p2link=false
+|m6map={{maps.5}}
+|m6win={% if matchup.0.set6.id == 837 and matchup.1.set6.id != 837 %}2{% elif matchup.1.set6.id == 837 and matchup.0.set6.id != 837 %}1{% endif %}
+&lt;!--Match 7--&gt
+|ace1p1={{matchup.0.set7.sc2_name}}{% if matchup.1.set7.id == 837 and matchup.0.set3.id != 837 %}*{% endif %} [[File:MasterMedium.png|17px]] |ace1p1race={{matchup.0.set7.race}} |ace1p1flag=ff |ace1p1link=false
+|ace1p2=[[File:MasterMedium.png|17px]] {{matchup.1.set7.sc2_name}}{% if matchup.0.set7.id == 837 and matchup.1.set7.id != 837 %}*{% endif %} |ace1p2race={{matchup.1.set7.race}} |ace1p2flag=ff |ace1p2link=false
+|ace1map={{maps.6}}
+|ace1win={% if matchup.0.set7.id == 837 and matchup.1.set7.id != 837 %}2{% elif matchup.1.set7.id == 837 and matchup.0.set7.id != 837 %}1{% endif %}
+&lt;!--Match 8--&gt;
+|ace2p1={{matchup.0.set7.sc2_name}}{% if matchup.1.set7.id == 837 and matchup.0.set3.id != 837 %}*{% endif %} [[File:MasterMedium.png|17px]] |ace2p1race={{matchup.0.set7.race}} |ace2p1flag=ff |ace2p1link=false
+|ace2p2=[[File:MasterMedium.png|17px]] {{matchup.1.set7.sc2_name}}{% if matchup.0.set7.id == 837 and matchup.1.set7.id != 837 %}*{% endif %} |ace2p2race={{matchup.1.set7.race}} |ace2p2flag=ff |ace2p2link=false
+|ace2map=
+|ace2win={% if matchup.0.set7.id == 837 and matchup.1.set7.id != 837 %}2{% elif matchup.1.set7.id == 837 and matchup.0.set7.id != 837 %}1{% endif %}
+&lt;!--Match 9--&gt;
+|ace3p1={{matchup.0.set7.sc2_name}} [[File:MasterMedium.png|17px]] |ace3p1race={{matchup.0.set7.race}} |ace3p1flag=ff |ace3p1link=false
+|ace3p2=[[File:MasterMedium.png|17px]] {{matchup.1.set7.sc2_name}} |ace3p2race={{matchup.1.set7.race}} |ace3p2flag=ff |ace3p2link=false
+|ace3map=
+|ace3win=
+{% templatetag closevariable %}
+{% endfor %}{% templatetag openvariable %}Box|end{% templatetag closevariable %}
+</textarea><br /><br />
+<p>HTML:</p><br />
+<textarea rows="4" cols="50">
+{{html_code}}
+</textarea><br />
+<a class="btn btn-outline-primary" class="btn btn-outline-primary" href = "{% url 'view_lineups'%}">Generate code for a new week</a><br />
+<a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a>
+    {% else %}
+        <form action = "{% url 'view_lineups' %}" method="post">
+            {% csrf_token %}
+            {% if message %} <p> {{ message | safe }} </p>{% endif %}
+            {% if make_old_lineups %}
+                <form action = "{% url 'view_lineups' %}" method="post">
+                    <input type="hidden" name="make_old_lineups" value="42"/>
+                    <input type="hidden" name="week" value="{{req_week.id}}" />
+                    <input type="submit" value="Copy old lineups for the above teams" />
+                </form><br /><br />
+            {% endif %}
+            Week:
+                <select name="week">
+                    {% for w in weeks %}
+                        <option value="{{w.id}}">{{w}}</option>
+                    {% endfor %}
+                </select><br />
+            <input value='Submit' type='submit'>
+        </form><br />
+        <a class="btn btn-outline-primary" href = "{% url 'index' %}">Return to index</a><br />
+    {% endif %}
+{% endblock %}
