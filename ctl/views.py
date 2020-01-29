@@ -15,6 +15,12 @@ from .models import Player, Roster, Maps, Lineup, Matchup, MatchReport, ResultSe
 #from django.db.models.fields.related_descriptors import RelatedObjectDoesNotExist
 
 # Create your views here.
+
+###############################################################################
+#   If the user is an admin, return the admin menu.                           #
+#   Otherwise, return the captain menu.                                       #
+#   If the user does not exist, get them redirected to the login page.        #
+###############################################################################
 @login_required(redirect_field_name=None)
 def index(request):
     try:
@@ -25,11 +31,16 @@ def index(request):
     except ObjectDoesNotExist as e:
         return render(request, 'ctl/index.html', {'not_auth':True})
 
-
+###############################################################################
+#  User request to be able to pet ducks after submitting a lineup.            #
+###############################################################################
 @login_required(redirect_field_name=None)
 def pet_duck(request):
     return render(request, "ctl/pet_duck.html")
 
+###############################################################################
+#   Get the captain's team, and display it to them formatted.                 #
+###############################################################################
 @login_required(redirect_field_name=None)
 def roster_test(request):
     team = request.user.captain.team
@@ -40,6 +51,12 @@ def roster_test(request):
     inactive = team.player_set.filter(league = 7).order_by('race')
     return render(request, "ctl/roster_test.html", {'team': team, 'golds': golds, 'plats': plats, "diamonds": diamonds, "masters": masters, "bench": inactive})
 
+
+###############################################################################
+#   If data not submitted, then display a form.                               #
+#   Otherwise, get all info from the form, then create an object, checking    #
+#   for identical players. If the user is an admin, then give them add. info  #
+###############################################################################
 @login_required(redirect_field_name=None)
 def add_player(request):
     if 'team' not in request.POST:
@@ -77,49 +94,10 @@ def add_player(request):
                 team = get_object_or_404(Roster, team_abrv = request.user.captain.team.team_abrv)
                 return render(request, 'ctl/add_player.html', {'team': team, 'message': "That player already is in the database."})
 
-
-"""@login_required(redirect_field_name=None)
-def edit_player(request):
-    if 'player' in request.POST:
-        player = Player.objects.get(pk = request.POST['player'])
-        if request.user.captain.is_admin:
-            teams = Roster.objects.all()
-            return render(request, 'ctl/edit_player.html', {'teams': teams, 'player': player})
-        else:
-            return render(request, 'ctl/edit_player.html', {'player': player})
-
-    elif 'team' not in request.POST:
-        if request.user.captain.is_admin:
-            roster = Player.objects.all()
-            return render(request, 'ctl/edit_player.html', {'roster': roster})
-        else:
-            team = get_object_or_404(Roster, team_abrv = request.user.captain.team.team_abrv)
-            roster = team.player_set.all()
-            return render(request, 'ctl/edit_player.html', {'roster': roster})
-
-    else:
-        t = Roster.objects.get(team_name=request.POST['team'])
-        bnet_id = request.POST['bnet_name']
-        ctl_n = request.POST['ctl_name']
-        ctl_u = request.POST['ctl_url']
-        l = request.POST['league']
-        r = request.POST['race']
-        player = Player.objects.get(pk = request.POST['id'])
-        player.team = t
-        player.bnet_name = bnet_id
-        player.sc2_name = ctl_n
-        player.ctl_url = ctl_u
-        player.league = l
-        player.race = r
-        player.save()
-        if request.user.captain.is_admin:
-            roster = Player.objects.all()
-            return render(request, 'ctl/edit_player.html', {'roster': roster})
-        else:
-            team = get_object_or_404(Roster, team_abrv = request.user.captain.team.team_abrv)
-            roster = team.player_set.all()
-            return render(request, 'ctl/edit_player.html', {'roster': roster})"""
-
+###############################################################################
+#   Similar to add_player, but the form searches for a player name.           #
+#   If the user is a captain, they cannot edit a player not on their team.    #
+###############################################################################
 @login_required(redirect_field_name=None)
 def edit_player(request):
 
@@ -174,6 +152,9 @@ def edit_player(request):
             player.save()
             return render(request, 'ctl/edit_player.html', {'message': "Player successfully edited."})
 
+###############################################################################
+#   Lets a captain select a player and remove them from their team.           #
+###############################################################################
 @login_required(redirect_field_name=None)
 def remove_player(request):
     message = ''
@@ -193,6 +174,15 @@ def remove_player(request):
     except:
         return render(request, "ctl/remove_player.html", {'message': "You are not a captain. If you are a captain, please PM Kamarill ASAP."})
 
+
+###############################################################################
+#   The main user functionality of the system. This generates HTML and        #
+#   MediaWiki formatted code so that admins can copy/paste lineups into the   #
+#   respective areas. Lineups are submitted by captains. In addition, if      #
+#   a captain failed to submit a lineup for the week, this duplicates their   #
+#   previous lineups, and submits that for them if the admins select that     #
+#   option.                                                                   #
+###############################################################################
 @login_required(redirect_field_name=None)
 def view_lineups(request):
     if request.user.captain.is_admin:
@@ -336,6 +326,10 @@ def view_lineups_blank(request):
     else:
         return HttpResponse("You shouldn't be here.")
 
+###############################################################################
+#   This creates a result_set object, used to display match reports, which    #
+#   admins use to create results for the week.                                #
+###############################################################################
 @login_required(redirect_field_name=None)
 def view_match_reports(request):
     if request.user.captain.is_admin:
@@ -369,27 +363,10 @@ def view_match_reports(request):
     else:
         return HttpResponse("You shouldn't be here.")
 
-@login_required(redirect_field_name=None)
-def typeform(request):
-    message = ''
-    if 'set1' in request.POST:
-        players = []
-        players.append(Player.objects.get(sc2_name=request.POST['set1']))
-        players.append(Player.objects.get(sc2_name=request.POST['set2']))
-        players.append(Player.objects.get(sc2_name=request.POST['set3']))
-        players.append(Player.objects.get(sc2_name=request.POST['set4']))
-        players.append(Player.objects.get(sc2_name=request.POST['set5']))
-        players.append(Player.objects.get(sc2_name=request.POST['set6']))
-        players.append(Player.objects.get(sc2_name=request.POST['set7']))
 
-        for i in range(7):
-            message += "Set " + str(i+1) + ' - ' + players[i].sc2_name + ", " + players[i].bnet_name + ' - ' + players[i].race + '<br />'
-    else:
-        message = "Error. If you should see a lineup here, PM Kamarill ASAP."
-
-    return render(request, "ctl/typeform.html", {"message": message})
-    #return HttpResponse("Submitted.")
-
+###############################################################################
+#   Old function which generates an lineup for manual submission. Unused.     #
+###############################################################################
 @login_required(redirect_field_name=None)
 def create_typeform(request):
     try:
@@ -408,6 +385,10 @@ def create_typeform(request):
     except:
        return render(request, "ctl/create_typeform.html", {'message': "You are not a captain. If you are a captain, please PM Kamarill ASAP."})
 
+###############################################################################
+#   Displays a form for lineup submission, and if data is present, submit the #
+#   lineup.                                                                   #
+###############################################################################
 @login_required(redirect_field_name=None)
 def submit_lineup(request):
     if 'set1' in request.POST:
@@ -467,6 +448,11 @@ def submit_lineup(request):
         except:
            return render(request, "ctl/submit_lineup.html", {'message': "You are not a captain. If you are a captain, please PM Kamarill ASAP."})
 
+
+###############################################################################
+#   This function was used to convert the old roster page (BBCode) to Django  #
+#   model objects, to avoid manual entry. Unused today.                       #
+###############################################################################
 @login_required(redirect_field_name=None)
 def bulk_add(request, team):
     if 'text' not in request.POST:
@@ -520,6 +506,11 @@ def create_account(request):
 def css_test(request):
     return render(request, "ctl/css_test.html")
 
+
+###############################################################################
+#   Very similar to submitting a lineup. Displays a form, and if data is      #
+#   present, create a match report object.                                    #
+###############################################################################
 @login_required(redirect_field_name=None)
 def submit_match_report(request):
     if 'week' not in request.POST:
@@ -564,7 +555,9 @@ def submit_match_report(request):
         weeks = Maps.objects.exclude(start_date__gt=timezone.now() - datetime.timedelta(days=7))
         return render(request, "ctl/submit_match_report.html", {'weeks': weeks, 'message': "Your match report was successfully submitted."})
 
-
+###############################################################################
+#   A very lazy and casual password reset. Requires me to create a token.     #
+###############################################################################
 def reset_pw(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
@@ -581,7 +574,7 @@ def reset_pw(request):
                 return HttpResponse('Your passwords did not match. Hit Back and try again.')
             else:
                 #return HttpResponse(f"Token: '{request.POST['token']}' vs '{request.user.password.split('$')[3]}'")
-                return HttpResponse('You either got a bad link from Kam or you fucked up.')
+                return HttpResponse('You either got a bad link from Kam or you messed up.')
 
     else:
         form = NameForm()
